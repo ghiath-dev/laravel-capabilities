@@ -14,13 +14,6 @@
             "Holoultek\\Capabilities\\Tests\\": "tests"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-              "CapabilitiesServiceProvider"
-            ]
-        }
-    },
     "authors": [
         {
             "name": "ghiath-dev",
