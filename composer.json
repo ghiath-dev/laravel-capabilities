@@ -1,0 +1,30 @@
+{
+    "name": "holoultek/laravel-capabilities",
+    "description": "Laravel package to add roles and capabilities for your project",
+    "version": "0.0.1",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Holoultek\\Capabilities\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Holoultek\\Capabilities\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+              "ContentBlocksServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "ghiath-dev",
+            "email": "ghiath.dev@gmail.com"
+        }
+    ],
+    "require": {}
+}
