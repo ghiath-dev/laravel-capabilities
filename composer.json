@@ -1,8 +1,9 @@
 {
     "name": "holoultek/laravel-capabilities",
-    "description": "Laravel package to add roles and capabilities for your project",
+    "description": "Laravel package to add roles and capabilities functionality for your project",
     "version": "0.0.1",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Holoultek\\Capabilities\\": "src/"
@@ -16,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-              "ContentBlocksServiceProvider"
+              "CapabilitiesServiceProvider"
             ]
         }
     },
