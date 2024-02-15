@@ -10,4 +10,4 @@ composer require holoultek/laravel-capabilities
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Contact
-If you have any questions or concerns, feel free to reach out to me at ghiath.dev@gmaul.com
+If you have any questions or concerns, feel free to reach out to me at ghiath.dev@gmail.com
