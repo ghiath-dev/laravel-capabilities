@@ -128,4 +128,4 @@ $auth->hr('Role Name');
 
 ## Contact
 
-If you have any questions or concerns, feel free to reach out to me at ghiath.dev@gmail.com
+If you have any questions or concerns, feel free to reach out to me at ghiath.dev@gmail.com, or by visiting https://holloultek.com
