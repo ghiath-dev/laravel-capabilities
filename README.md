@@ -109,7 +109,7 @@ $auth->ra('Role Name');
 $auth->rd('Role Name');
 ```
 
-#### To check if auth model has capability or role
+#### To check if auth model has a capability or role
 ```php
 $auth->hasCapability('Capability Name');
 

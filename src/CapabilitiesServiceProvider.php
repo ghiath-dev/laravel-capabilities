@@ -37,7 +37,7 @@ class CapabilitiesServiceProvider extends ServiceProvider
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('capability', CapabilityMiddleware::class);
 
-        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.0.3']);
+        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.0.5']);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
