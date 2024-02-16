@@ -3,8 +3,8 @@
 namespace Holoultek\Capabilities\Models;
 
 use App\Models\User;
-use App\Traits\HasCapabilities;
 use Holoultek\Capabilities\Factories\RoleFactory;
+use Holoultek\Capabilities\Traits\HasCapabilities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;

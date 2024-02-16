@@ -81,22 +81,22 @@ trait HasCapabilities
     }
 
     // Shortcuts
-    public function hc(string $capability)
+    public function hc(string $capability): bool
     {
         return $this->hasCapability($capability);
     }
 
-    public function ca(string $capability)
+    public function ca(string $capability): void
     {
         $this->capabilityAttach($capability);
     }
 
-    public function cd(string $capability)
+    public function cd(string $capability): void
     {
         $this->capabilityDetach($capability);
     }
 
-    public function scopeHasCapabilities(Builder $query, array $capabilities)
+    public function scopeHasCapabilities(Builder $query, array $capabilities): void
     {
         $query->whereHas('capabilities', function ($q) use ($capabilities) {
             $q->whereIn('name', $capabilities);

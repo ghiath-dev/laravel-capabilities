@@ -27,7 +27,7 @@ class CapabilitiesServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/capabilities.php' => config_path('capabilities.php'),
             __DIR__ . '/../config/roles.php' => config_path('roles.php'),
-        ]);
+        ], 'laravel-capabilities');
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
