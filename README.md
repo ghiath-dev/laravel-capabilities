@@ -8,6 +8,14 @@ To use the package:
 ```
 composer require holoultek/laravel-capabilities
 ```
+
+### Uuid Auth models
+If you are using uuid instead of the normal integer id for your auth models, you should publish the migrations and update the columns.
+
+```
+php artisan vendor:publish --tag=laravel-capabilities-migrations
+```
+
 ### Migrate the database
 
 ```
@@ -17,7 +25,7 @@ php artisan migrate
 ### Then you have to publish the config files for roles and capabilities
 
 ```
-php artisan vendor:publish --provider="Holoultek\Capabilities\CapabilitiesServiceProvider"
+php artisan vendor:publish --tag=laravel-capabilities-config
 ```
 
 This will publish 2 files:
