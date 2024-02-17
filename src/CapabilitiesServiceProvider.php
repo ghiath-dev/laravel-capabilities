@@ -30,14 +30,18 @@ class CapabilitiesServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/capabilities.php' => config_path('capabilities.php'),
             __DIR__.'/../config/roles.php' => config_path('roles.php'),
-        ], 'laravel-capabilities');
+        ], 'laravel-capabilities-config');
+
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+        ], 'laravel-capabilities-migrations');
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('capability', CapabilityMiddleware::class);
 
-        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.0.5']);
+        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.0.6']);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
