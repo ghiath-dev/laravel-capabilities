@@ -22,6 +22,6 @@ class Role extends Model
 
     public function users(): MorphToMany
     {
-        return $this->morphToMany(User::class, 'roleable');
+        return $this->morphedByMany(User::class, 'model', 'roles_able');
     }
 }
