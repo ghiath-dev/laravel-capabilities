@@ -7,6 +7,7 @@ use Holoultek\Capabilities\Factories\CapabilityFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Capability extends Model
 {
@@ -28,8 +29,8 @@ class Capability extends Model
         return $this->belongsToMany(Role::class);
     }
 
-    public function users(): BelongsToMany
+    public function users(): MorphToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->morphedByMany(User::class, 'model', 'capabilities_able');
     }
 }

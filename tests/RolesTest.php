@@ -15,7 +15,7 @@ class RolesTest extends TestCase
     /** @test */
     public function a_role_cannot_be_assigned_to_user_until_it_is_created()
     {
-        $user = User::factory()->test()->create();
+        $user = User::factory()->create();
 
         $this->expectException(RoleNotExistException::class);
         $this->expectExceptionMessage('Role is not exist');
@@ -25,7 +25,7 @@ class RolesTest extends TestCase
     /** @test */
     public function a_role_can_be_assigned_to_user()
     {
-        $user = User::factory()->test()->create();
+        $user = User::factory()->create();
         Role::factory()->admin()->create();
 
         $user->roleAttach('admin');
@@ -35,7 +35,7 @@ class RolesTest extends TestCase
     /** @test */
     public function a_role_with_whitespaces_can_be_assigned_to_user()
     {
-        $user = User::factory()->test()->create();
+        $user = User::factory()->create();
         Role::factory()->admin()->create([
             'name' => 'admin user'
         ]);
@@ -47,7 +47,7 @@ class RolesTest extends TestCase
     /** @test */
     public function removing_role_from_user()
     {
-        $user = User::factory()->test()->create();
+        $user = User::factory()->create();
         Role::factory()->admin()->create();
 
         $user->roleAttach('admin');
@@ -68,5 +68,18 @@ class RolesTest extends TestCase
 
         $role->capabilityDetach('create users');
         $this->assertFalse($role->hasCapability('create users'));
+    }
+
+    /** @test */
+    public function a_role_morphs_many_users()
+    {
+        $role = Role::factory()->admin()->create();
+        User::factory()->count(2)->create()
+            ->map(function ($user) use ($role) {
+                $user->roleAttach($role->name);
+                return $user;
+            });
+
+        $this->assertEquals(2, $role->users->count());
     }
 }

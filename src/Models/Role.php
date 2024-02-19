@@ -7,7 +7,7 @@ use Holoultek\Capabilities\Factories\RoleFactory;
 use Holoultek\Capabilities\Traits\HasCapabilities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Role extends Model
 {
@@ -20,8 +20,8 @@ class Role extends Model
         return new RoleFactory;
     }
 
-    public function users(): HasMany
+    public function users(): MorphToMany
     {
-        return $this->hasMany(User::class);
+        return $this->morphToMany(User::class, 'roleable');
     }
 }

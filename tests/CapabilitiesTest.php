@@ -56,4 +56,16 @@ class CapabilitiesTest extends TestCase
         $this->assertFalse($role->hasCapability('create users'));
     }
 
+    /** @test */
+    public function a_capability_morph_many_users() {
+        $capability = Capability::factory()->create();
+        User::factory()->count(2)->create()
+            ->map(function ($user) use ($capability) {
+                $user->capabilityAttach($capability->name);
+                return $user;
+            });
+
+        $this->assertEquals(2, $capability->users->count());
+    }
+
 }
