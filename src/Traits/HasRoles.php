@@ -34,7 +34,7 @@ trait HasRoles
     public function oneRoleAttach(int|string $role): void
     {
         if (is_int($role)) {
-            $this->roles()->sync([$role]);
+            $this->roles()->syncWithoutDetaching([$role]);
             return;
         }
 
@@ -47,11 +47,10 @@ trait HasRoles
     public function roleAttach(string|array|int $role): void
     {
         if (is_array($role)) {
-            foreach ($role as $_role) {
-                $this->oneRoleAttach($_role);
-            }
+            $this->roles()->syncWithoutDetaching([$role]);
             return;
         }
+
         $this->oneRoleAttach($role);
     }
 
