@@ -47,7 +47,7 @@ trait HasRoles
     public function roleAttach(string|array|int $role): void
     {
         if (is_array($role)) {
-            $this->roles()->syncWithoutDetaching([$role]);
+            $this->roles()->syncWithoutDetaching($role);
             return;
         }
 
