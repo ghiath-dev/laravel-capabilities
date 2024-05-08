@@ -19,7 +19,7 @@ class CapabilityMiddleware
     {
         if ($request->user()->isChief()) return $next($request);
 
-        if (!$request->route()->controller instanceof Closure) abort(403);
+        if ($request->route()->controller instanceof Closure) abort(403);
 
         $controller = $request->route()->getController();
         $controller = get_class($controller);

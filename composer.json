@@ -2,7 +2,7 @@
     "name": "holoultek/laravel-capabilities",
     "description": "Laravel package to add roles and capabilities functionality for your project",
     "version": "0.0.8",
-    "type": "library",
+    "type": "package",
     "license": "MIT",
     "autoload": {
         "psr-4": {
