@@ -48,6 +48,7 @@ class GenerateRolesCommand extends Command
                 'name' => $role_name
             ]);
 
+            $role->capabilities()->detach();
             foreach ($capabilities as $capability_name) {
                 $role->capabilityAttach($capability_name);
             }
