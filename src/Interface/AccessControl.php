@@ -1,6 +1,6 @@
 <?php
 
-namespace Holoultek\Capabilities\Classes;
+namespace Holoultek\Capabilities\Interface;
 
 interface AccessControl
 {
