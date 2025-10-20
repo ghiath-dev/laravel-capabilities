@@ -4,7 +4,11 @@ namespace Holoultek\Capabilities;
 
 use Holoultek\Capabilities\Commands\GenerateCapabilitiesCommand;
 use Holoultek\Capabilities\Commands\GenerateRolesCommand;
+use Holoultek\Capabilities\Facades\UserContext;
+use Holoultek\Capabilities\Middleware\CapabilitiesContextMiddleware;
 use Holoultek\Capabilities\Middleware\CapabilityMiddleware;
+use Holoultek\Capabilities\Services\UserContextManager;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -40,8 +44,13 @@ class CapabilitiesServiceProvider extends ServiceProvider
 
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('capability', CapabilityMiddleware::class);
+        $router->aliasMiddleware('capabilities-context', CapabilitiesContextMiddleware::class);
 
-        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.0.8', 'Author' => 'ghiath-dev']);
+        $this->app->singleton(UserContextManager::class, function () {
+            return new UserContextManager();
+        });
+
+        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.1.0', 'Author' => 'ghiath-dev']);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
