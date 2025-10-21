@@ -2,7 +2,7 @@
 
 namespace Holoultek\Capabilities\Services;
 
-use App\Models\User;
+use Holoultek\Capabilities\Interface\AccessControlledUser;
 use Illuminate\Support\Facades\Context;
 
 class UserContextManager
@@ -44,7 +44,7 @@ class UserContextManager
     /**
      * Set user basic info in context
      */
-    private static function setUserContext(User $user): void
+    private static function setUserContext(AccessControlledUser $user): void
     {
         Context::add(self::CTX_USER_ID, $user->id);
         Context::add(self::CTX_IS_CHIEF, $user->isChief());
@@ -53,7 +53,7 @@ class UserContextManager
     /**
      * Set user roles in context
      */
-    private static function setRolesContext(User $user): void
+    private static function setRolesContext(AccessControlledUser $user): void
     {
         if (!Context::has(self::CTX_ROLES)) {
             $roles = $user->roles->pluck('name')->toArray();
@@ -64,7 +64,7 @@ class UserContextManager
     /**
      * Set user capabilities in context
      */
-    private static function setCapabilitiesContext(User $user): void
+    private static function setCapabilitiesContext(AccessControlledUser $user): void
     {
         if (!Context::has(self::CTX_CAPABILITIES)) {
             if ($user->isChief()) {

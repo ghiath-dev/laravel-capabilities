@@ -2,7 +2,7 @@
 
 namespace Holoultek\Capabilities\Interface;
 
-interface AccessControl
+interface AccessControlledUser
 {
     public function isChief(): bool;
 }
