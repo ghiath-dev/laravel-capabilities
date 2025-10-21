@@ -12,10 +12,10 @@ class CapabilitiesContextMiddleware
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ?string $guard = null): Response
     {
         if (!UserContextManager::isInitialized()) {
-            UserContextManager::initialize();
+            UserContextManager::initialize($guard);
         }
 
         return $next($request);

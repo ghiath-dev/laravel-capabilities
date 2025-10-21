@@ -22,17 +22,19 @@ class UserContextManager
     /**
      * Initialize all user context for the current request
      */
-    public static function initialize(): void
+    public static function initialize(?string $guard = null): void
     {
+        $guard = $guard ?? config('auth.defaults.guard');
+
         if (
-            !auth('web')->check()
-            || !method_exists(User::class, 'roles')
-            || !method_exists(User::class, 'capabilities')
+            !auth($guard)->check()
+            || !method_exists(auth($guard)->user(), 'roles')
+            || !method_exists(auth($guard)->user(), 'capabilities')
         ) {
             return;
         }
 
-        $user = auth()->user()->load(['roles.capabilities', 'capabilities']);
+        $user = auth($guard)->user()->load(['roles.capabilities', 'capabilities']);
 
         static::setUserContext($user);
         static::setRolesContext($user);
