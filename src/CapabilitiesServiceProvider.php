@@ -4,11 +4,9 @@ namespace Holoultek\Capabilities;
 
 use Holoultek\Capabilities\Commands\GenerateCapabilitiesCommand;
 use Holoultek\Capabilities\Commands\GenerateRolesCommand;
-use Holoultek\Capabilities\Facades\UserContext;
 use Holoultek\Capabilities\Middleware\CapabilitiesContextMiddleware;
 use Holoultek\Capabilities\Middleware\CapabilityMiddleware;
 use Holoultek\Capabilities\Services\UserContextManager;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -40,7 +38,9 @@ class CapabilitiesServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/' => database_path('migrations')
         ], 'laravel-capabilities-migrations');
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->publishes([
+            __DIR__.'/../database/migrations/create_capabilities_roles_tables.php.stub' => database_path('migrations/'.date('Y_m_d_His').'create_capabilities_roles_tables.php'),
+        ], 'migrations');
 
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('capability', CapabilityMiddleware::class);
@@ -50,7 +50,7 @@ class CapabilitiesServiceProvider extends ServiceProvider
             return new UserContextManager();
         });
 
-        AboutCommand::add('Laravel Capabilities', fn () => ['Version' => '0.1.1', 'Author' => 'ghiath-dev']);
+        AboutCommand::add('Laravel Capabilities', fn() => ['Version' => '0.1.1', 'Author' => 'ghiath-dev']);
 
         if ($this->app->runningInConsole()) {
             $this->commands([

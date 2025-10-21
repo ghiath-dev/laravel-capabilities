@@ -1,0 +1,77 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // Create roles table
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        // Create capabilities table
+        Schema::create('capabilities', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('controller')->nullable();
+            $table->json('methods');
+            $table->timestamps();
+        });
+
+        // Create capability_role pivot table
+        Schema::create('capability_role', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('capability_id');
+            $table->foreign('capability_id')->references('id')->on('capabilities')->cascadeOnDelete();
+
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->cascadeOnDelete();
+        });
+
+        // Create roles_able polymorphic table
+        Schema::create('roles_able', function (Blueprint $table) {
+            $table->id();
+
+            $table->morphs('model');
+
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->cascadeOnDelete();
+        });
+
+        // Create capabilities_able polymorphic table
+        Schema::create('capabilities_able', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('capability_id');
+            $table->foreign('capability_id')->references('id')->on('capabilities')->cascadeOnDelete();
+
+            $table->morphs('model');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('capabilities_able');
+        Schema::dropIfExists('roles_able');
+        Schema::dropIfExists('capability_role');
+        Schema::dropIfExists('capabilities');
+        Schema::dropIfExists('roles');
+    }
+};
