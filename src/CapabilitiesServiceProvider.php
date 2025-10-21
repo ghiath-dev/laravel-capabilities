@@ -46,7 +46,7 @@ class CapabilitiesServiceProvider extends ServiceProvider
             return new UserContextManager();
         });
 
-        AboutCommand::add('Laravel Capabilities', fn() => ['Version' => '0.1.2', 'Author' => 'ghiath-dev']);
+        AboutCommand::add('Laravel Capabilities', fn() => ['Version' => '0.1.3', 'Author' => 'ghiath-dev']);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
