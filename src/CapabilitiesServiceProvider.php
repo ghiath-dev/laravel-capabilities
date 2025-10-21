@@ -36,7 +36,7 @@ class CapabilitiesServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../database/migrations/create_capabilities_roles_tables.php.stub' => database_path('migrations/'.date('Y_m_d_His').'create_capabilities_roles_tables.php'),
-        ], 'migrations');
+        ], 'laravel-capabilities-migrations');
 
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('capability', CapabilityMiddleware::class);
