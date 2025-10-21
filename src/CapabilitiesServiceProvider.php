@@ -35,10 +35,6 @@ class CapabilitiesServiceProvider extends ServiceProvider
         ], 'laravel-capabilities-config');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/' => database_path('migrations')
-        ], 'laravel-capabilities-migrations');
-
-        $this->publishes([
             __DIR__.'/../database/migrations/create_capabilities_roles_tables.php.stub' => database_path('migrations/'.date('Y_m_d_His').'create_capabilities_roles_tables.php'),
         ], 'migrations');
 
@@ -50,7 +46,7 @@ class CapabilitiesServiceProvider extends ServiceProvider
             return new UserContextManager();
         });
 
-        AboutCommand::add('Laravel Capabilities', fn() => ['Version' => '0.1.1', 'Author' => 'ghiath-dev']);
+        AboutCommand::add('Laravel Capabilities', fn() => ['Version' => '0.1.2', 'Author' => 'ghiath-dev']);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
