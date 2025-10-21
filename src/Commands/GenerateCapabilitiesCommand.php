@@ -45,6 +45,14 @@ class GenerateCapabilitiesCommand extends Command
         $capabilities = [];
 
         foreach (config('capabilities') as $controller => $capability) {
+            if (!is_array($capability)) {
+                $controller = null;
+
+                $capability = [
+                    $capability => []
+                ];
+            }
+
             foreach ($capability as $capability_name => $methods) {
                 $_capability = Capability::updateOrCreate([
                     'name' => $capability_name,

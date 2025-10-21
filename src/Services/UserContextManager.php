@@ -4,7 +4,6 @@ namespace Holoultek\Capabilities\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Context;
-use Illuminate\Support\Facades\DB;
 
 class UserContextManager
 {
@@ -86,7 +85,7 @@ class UserContextManager
      */
     public static function hasRole(string|array $roles): bool
     {
-        $userRoles = static::getRoles(); // Use internal getter
+        $userRoles = static::getRoles();
 
         if (is_string($roles)) {
             return in_array($roles, $userRoles);
@@ -108,7 +107,7 @@ class UserContextManager
      */
     public static function hasAllRoles(array $roles): bool
     {
-        $userRoles = static::getRoles(); // Use internal getter
+        $userRoles = static::getRoles();
         return empty(array_diff($roles, $userRoles));
     }
 
